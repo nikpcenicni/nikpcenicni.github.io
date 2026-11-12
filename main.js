@@ -205,7 +205,7 @@ function initContact() {
     } catch (err) {
       console.error(err);
       status.className = "err";
-      status.innerHTML = 'Something went wrong. Email me directly at <a href="mailto:nik@pcenicni.dev">nik@pcenicni.dev</a>.';
+      status.innerHTML = 'Something went wrong. Try again, or reach me on <a href="https://www.linkedin.com/in/nikholaspcenicni/" target="_blank" rel="noopener">LinkedIn</a>.';
     } finally {
       button.disabled = false;
       button.textContent = "Send message";
