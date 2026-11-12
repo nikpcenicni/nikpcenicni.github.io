@@ -5,7 +5,7 @@ const GITHUB_USER = "nikpcenicni";
 // FormSubmit relays the form to this address with no signup. The very first
 // submission sends an activation email to it; click the link and you're live.
 // To use Formspree instead, set this to "https://formspree.io/f/<your-id>".
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/nik@pcenicni.dev";
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/24f1aac6e3996c08f9c756a6aaae700e";
 
 // Repos never shown on the site.
 const HIDDEN = new Set(["nikpcenicni"]);
