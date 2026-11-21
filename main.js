@@ -67,7 +67,7 @@ function typeLoop(el) {
 
 // ---- Projects -----------------------------------------------------------
 
-const CACHE_KEY = "repos-cache-v2";
+const CACHE_KEY = "repos-cache-v3";
 const CACHE_TTL = 60 * 60 * 1000; // unauthenticated API allows 60 req/hr per IP
 
 async function fetchRepos() {
