@@ -2,6 +2,9 @@
 
 const GITHUB_USER = "nikpcenicni";
 
+// Custom domain for GitHub Pages (see CNAME); project sites live under it.
+const PAGES_DOMAIN = "pcenicni.dev";
+
 // FormSubmit relays the form to my inbox. The random string is FormSubmit's
 // alias for my address, so the email itself isn't exposed in the page source.
 // To use Formspree instead, set this to "https://formspree.io/f/<your-id>".
@@ -103,8 +106,8 @@ function card(r) {
   const homepage = r.homepage && /^https?:\/\//.test(r.homepage) ? r.homepage : r.homepage ? `https://${r.homepage}` : null;
   const pagesURL = r.pages
     ? r.name.toLowerCase() === `${GITHUB_USER}.github.io`.toLowerCase()
-      ? `https://${GITHUB_USER}.github.io/`
-      : `https://${GITHUB_USER}.github.io/${r.name}/`
+      ? `https://${PAGES_DOMAIN}/`
+      : `https://${PAGES_DOMAIN}/${r.name}/`
     : null;
   // Prefer the live site for the title link; the repo moves to the meta row.
   const site = homepage || pagesURL;
