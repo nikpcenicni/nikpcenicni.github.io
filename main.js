@@ -65,7 +65,7 @@ function typeLoop(el) {
 
 // ---- Projects -----------------------------------------------------------
 
-const CACHE_KEY = "repos-cache-v1";
+const CACHE_KEY = "repos-cache-v2";
 const CACHE_TTL = 60 * 60 * 1000; // unauthenticated API allows 60 req/hr per IP
 
 async function fetchRepos() {
@@ -83,7 +83,7 @@ async function fetchRepos() {
   const repos = (await res.json()).map((r) => ({
     name: r.name, url: r.html_url, description: r.description, language: r.language,
     stars: r.stargazers_count, forks: r.forks_count, homepage: r.homepage,
-    archived: r.archived, fork: r.fork, pushed: r.pushed_at, topics: r.topics || [],
+    archived: r.archived, fork: r.fork, pages: r.has_pages, pushed: r.pushed_at, topics: r.topics || [],
   }));
   try { localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), repos })); } catch {}
   return repos;
@@ -101,16 +101,24 @@ function card(r) {
   const blurb = f.blurb || r.description || "No description yet.";
   const updated = new Date(r.pushed).toLocaleDateString(undefined, { year: "numeric", month: "short" });
   const homepage = r.homepage && /^https?:\/\//.test(r.homepage) ? r.homepage : r.homepage ? `https://${r.homepage}` : null;
+  const pagesURL = r.pages
+    ? r.name.toLowerCase() === `${GITHUB_USER}.github.io`.toLowerCase()
+      ? `https://${GITHUB_USER}.github.io/`
+      : `https://${GITHUB_USER}.github.io/${r.name}/`
+    : null;
+  // Prefer the live site for the title link; the repo moves to the meta row.
+  const site = homepage || pagesURL;
+  const titleURL = site || r.url;
   return `
     <article class="card">
-      <h4>${f.emoji ? `<span aria-hidden="true">${f.emoji}</span>` : ""}<a href="${r.url}" target="_blank" rel="noopener">${escapeHTML(r.name)}</a>
+      <h4>${f.emoji ? `<span aria-hidden="true">${f.emoji}</span>` : ""}<a href="${escapeHTML(titleURL)}" target="_blank" rel="noopener">${escapeHTML(r.name)}</a>
         ${r.fork ? '<span class="badge">fork</span>' : ""}</h4>
       <p>${escapeHTML(blurb)}</p>
       <div class="meta">
         ${r.language ? `<span><span class="dot" style="background:${LANG_COLORS[r.language] || "var(--muted)"}"></span>${escapeHTML(r.language)}</span>` : ""}
         ${r.stars ? `<span>★ ${r.stars}</span>` : ""}
         <span>${updated}</span>
-        ${homepage ? `<a href="${escapeHTML(homepage)}" target="_blank" rel="noopener">live ↗</a>` : ""}
+        ${site ? `<a href="${r.url}" target="_blank" rel="noopener">repo ↗</a>` : ""}
       </div>
     </article>`;
 }
