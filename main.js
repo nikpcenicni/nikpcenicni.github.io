@@ -11,19 +11,18 @@ const PAGES_DOMAIN = "pcenicni.dev";
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/24f1aac6e3996c08f9c756a6aaae700e";
 
 // Repos never shown on the site.
-const HIDDEN = new Set(["nikpcenicni"]);
+const HIDDEN = new Set(["nikpcenicni", "jellyfin-restart", "cf-ddns", "SpoolmanScale"]);
 
 // Forks are hidden unless listed here (some of my real projects are forks).
-const INCLUDE_FORKS = new Set(["SpoolmanScale", "MMM-iCloud-Client"]);
+const INCLUDE_FORKS = new Set(["MMM-iCloud-Client"]);
 
 // Hand-written blurbs and ordering. Anything not listed here still shows up,
 // using its GitHub description; listed repos are sorted to the top.
 const FEATURED = {
   Nikflix: { emoji: "🎬", blurb: "My whole homelab as code — Talos + Kubernetes on Proxmox, wired up with Terraform, Ansible and ArgoCD, with a self-hosted media stack on top. GitOps all the way down." },
-  SpoolmanScale: { emoji: "⚖️", blurb: "An ESP32 filament scale with an NFC reader and a touchscreen. Plop a spool on it, it knows what it is and how much is left." },
+  ManaRelay: { emoji: "🃏", blurb: "A life counter for Magic: The Gathering, on Android and iPhone. This repo hosts its website, the links to the App Store and Google Play, and beta builds you can grab outside the stores." },
   DashPlay: { emoji: "🚗", blurb: "Fullscreen playback from custom media sources in the Tesla browser. Because the car should be a cinema when parked." },
-  "jellyfin-restart": { emoji: "🩺", blurb: "A macOS watchdog that notices when Jellyfin stops responding and turns it off and on again, so I don't have to." },
-  "cf-ddns": { emoji: "🌩️", blurb: "Cloudflare dynamic DNS in a shell script. My ISP changes my IP; I change nothing." },
+  "nikpcenicni.github.io": { emoji: "🏠", blurb: "This website. You're looking at it, served by GitHub Pages at pcenicni.dev." },
   "MMM-iCloud-Client": { emoji: "🪞", blurb: "MagicMirror² module that turns iCloud contacts into a birthday calendar. The mirror remembers so I don't have to." },
   tetris: { emoji: "🧱", blurb: "The rite of passage." },
   Netflix: { emoji: "📺", blurb: "A clone, long before the homelab made it real (see: Nikflix)." },
